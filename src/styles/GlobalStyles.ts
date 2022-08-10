@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { scrollBar } from "./mixin";
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
@@ -9,6 +10,10 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Open Sans', sans-serif;
 
     
+}
+
+body{
+  ${scrollBar({})}
 }
 
 .container{

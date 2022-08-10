@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const STopSection = styled.div`
+  margin-bottom: 25px;
   .top-wrapper {
     display: flex;
     align-items: center;

@@ -1,4 +1,6 @@
-export const dataLiving = [
+import { TProduct } from "types";
+
+export const dataLiving: Pick<TProduct, "price">[] = [
   {
     price: "499000",
   },
