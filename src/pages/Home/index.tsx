@@ -3,6 +3,7 @@ import Banner from "./Banner";
 import Bathroom from "./Bathroom";
 import BedRoom from "./Bedroom";
 import Living from "./Living";
+import Sale from "./Sale";
 import { SHome } from "./styles";
 
 const Home = () => {
@@ -12,6 +13,7 @@ const Home = () => {
       <Living />
       <BedRoom />
       <Bathroom />
+      <Sale />
     </SHome>
   );
 };
