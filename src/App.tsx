@@ -16,12 +16,12 @@ const App = () => {
       <GlobalStyle />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Layout />}>
+          <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
           </Route>
         </Routes>
         <Routes>
-          <Route path="/" element={<LoginLayout />}>
+          <Route element={<LoginLayout />}>
             <Route path="/signin" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Route>

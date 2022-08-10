@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const SFooter = styled.div`
-  margin-top: 80px;
+  margin-top: 80px !important;
   .footer-top {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
