@@ -1,16 +1,33 @@
 import Footer from "components/Footer";
+import LoginLayout from "Layout/LoginLayout";
+import Login from "pages/Login";
+import Register from "pages/Register";
 import React from "react";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import GlobalStyle from "./styles/GlobalStyles";
-
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "Layout/Layout";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const App = () => {
   return (
     <>
       <GlobalStyle />
-      <Header />
-      <Home />
-      <Footer />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route path="/" element={<Home />} />
+          </Route>
+        </Routes>
+        <Routes>
+          <Route path="/" element={<LoginLayout />}>
+            <Route path="/signin" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+      <ToastContainer />
     </>
   );
 };
