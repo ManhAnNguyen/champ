@@ -85,7 +85,6 @@ export const STopSection = styled.div`
         padding-left: 0;
       }
       &:last-child {
-        padding-left: 0;
         &::before {
           content: none;
         }
