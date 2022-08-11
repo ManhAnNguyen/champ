@@ -6,17 +6,33 @@ import { GrCart } from "react-icons/gr";
 import { AiOutlineHeart, AiOutlineUndo } from "react-icons/ai";
 import { GoSearch } from "react-icons/go";
 import { RiShoppingCart2Fill } from "react-icons/ri";
+import { handleAddToCart } from "pages/Home/store";
+import { useAppDispatch } from "redux/hook";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   product: TProduct;
 };
 
 const SaleItem = ({ product }: Props) => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const addToCart = () => {
+    if (!localStorage.getItem("currentUser")) {
+      navigate("/signin");
+      return;
+    }
+    dispatch(handleAddToCart(product));
+    toast.success("Add item to cart successfully");
+  };
   return (
     <SSaleItem>
       <div className="product-img">
         <img src={product.img} alt="" />
-        <button className="add">ADD TO CART</button>
+        <button className="add" onClick={addToCart}>
+          ADD TO CART
+        </button>
       </div>
       <div className="product-bottom">
         <div className="product-info">

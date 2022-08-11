@@ -6,12 +6,26 @@ import { GrCart } from "react-icons/gr";
 import { AiOutlineHeart, AiOutlineUndo } from "react-icons/ai";
 import { GoSearch } from "react-icons/go";
 import { RiShoppingCart2Fill } from "react-icons/ri";
+import { useAppDispatch } from "redux/hook";
+import { handleAddToCart } from "pages/Home/store";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   product: TProduct;
 };
 
 const Item = ({ product }: Props) => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const addToCart = () => {
+    if (!localStorage.getItem("currentUser")) {
+      navigate("/signin");
+      return;
+    }
+    dispatch(handleAddToCart(product));
+    toast.success("Add item to cart successfully");
+  };
   return (
     <SItem>
       <div className="product-img">
@@ -23,7 +37,7 @@ const Item = ({ product }: Props) => {
           <p className="price">{moneyVND(thousandNumComma(product.price))}</p>
         </div>
         <div className="product-action">
-          <div className="action-item">
+          <div className="action-item" onClick={addToCart}>
             <span className="icon">
               <RiShoppingCart2Fill />
             </span>

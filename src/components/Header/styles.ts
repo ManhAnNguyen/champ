@@ -1,6 +1,13 @@
 import styled from "styled-components";
 
 export const SHeader = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 5;
+  background-color: white;
+
   &.container {
     .header-top {
       display: flex;

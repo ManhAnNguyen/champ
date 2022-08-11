@@ -11,6 +11,7 @@ import Layout from "Layout/Layout";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { homeSelector } from "pages/Home/store";
+import Cart from "pages/Cart";
 const App = () => {
   return (
     <>
@@ -20,6 +21,7 @@ const App = () => {
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
           </Route>
+          <Route path="/cart" element={<Cart />} />
         </Routes>
         <Routes>
           <Route element={<LoginLayout />}>

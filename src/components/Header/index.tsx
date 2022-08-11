@@ -5,9 +5,12 @@ import { AiFillUnlock } from "react-icons/ai";
 import { FiSearch } from "react-icons/fi";
 import { Link, useLocation } from "react-router-dom";
 import { BsPersonCircle } from "react-icons/bs";
+import { useAppSelector } from "redux/hook";
+import { homeSelector } from "pages/Home/store";
 
 const Header = () => {
   const [user, setUser] = useState<any>(null);
+  const { carts } = useAppSelector(homeSelector);
   const location = useLocation();
 
   const handleLogout = () => {
@@ -90,15 +93,19 @@ const Header = () => {
               <span className="item-right_text">(+84)123.456.7890</span>
             </div>
           </div>
-          <div className="option-item">
+          <Link
+            to="/cart"
+            style={{ textDecoration: "none" }}
+            className="option-item"
+          >
             <div className="item-left">
               <img src="/image/header/cart.png" alt="" />
             </div>
             <div className="item-right">
               <h3 className="item-right_title">Giỏ hàng</h3>
-              <span className="item-right_text">0 item(s)</span>
+              <span className="item-right_text">{carts.length} item(s)</span>
             </div>
-          </div>
+          </Link>
         </div>
       </div>
     </SHeader>
