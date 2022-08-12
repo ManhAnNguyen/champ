@@ -1,4 +1,6 @@
+import MessageError from "components/Error/ErrorForm";
 import Input from "components/Input";
+import useFormLogin from "hooks/form/useFormLogin";
 import React, { useState } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
@@ -6,51 +8,30 @@ import { toast } from "react-toastify";
 import styled from "styled-components";
 
 const Login = () => {
-  const [user, setUser] = useState({
-    name: "",
-    password: "",
-  });
+  const { errors, register, onSubmit } = useFormLogin();
 
-  const navigate = useNavigate();
-
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-
-    const users: any[] = localStorage.getItem("users")
-      ? JSON.parse(localStorage.getItem("users")!)
-      : [];
-
-    const findUser = users.find(
-      (data, index) =>
-        data.name === user.name && data.password === user.password
-    );
-
-    if (!!findUser) {
-      toast.success("Login Successfully");
-      localStorage.setItem("currentUser", JSON.stringify(findUser));
-      navigate("/");
-    } else {
-      toast.error("Not correct information");
-    }
-  };
   return (
     <SLogin>
       <h1 className="title">LOGIN</h1>
-      <form className="form" onSubmit={handleSubmit}>
+      <form className="form" onSubmit={onSubmit}>
         <div className="input">
           <Input
             label="Username"
-            value={user.name}
-            onChange={(e) => setUser({ ...user, name: e.target.value })}
+            register={{
+              ...register("name"),
+            }}
           />
+          <MessageError name="name" errors={errors} />
         </div>
         <div className="input">
           <Input
             label="Password"
             type="password"
-            value={user.password}
-            onChange={(e) => setUser({ ...user, password: e.target.value })}
+            register={{
+              ...register("password"),
+            }}
           />
+          <MessageError name="password" errors={errors} />
         </div>
         <Link to="/register">Don't have account. Register now!</Link>
         <div className="button-groups">

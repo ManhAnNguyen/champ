@@ -60,16 +60,14 @@ function useFormRegister() {
   const navigate = useNavigate();
 
   const onSubmit = useCallback((data: TRegisterFormData) => {
-    console.log(data);
+    const users = localStorage.getItem("users")
+      ? JSON.parse(localStorage.getItem("users")!)
+      : [];
 
-    // const users = localStorage.getItem("users")
-    //   ? JSON.parse(localStorage.getItem("users")!)
-    //   : [];
+    localStorage.setItem("users", JSON.stringify([...users, data]));
 
-    // localStorage.setItem("users", JSON.stringify([...users, user]));
-
-    // toast.success("Register successffully");
-    // navigate("/signin");
+    toast.success("Register successffully");
+    navigate("/signin");
   }, []);
 
   return {

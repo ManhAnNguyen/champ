@@ -49,6 +49,11 @@ const Register = () => {
             }}
             type="password"
           />
+          <p className="required">
+            password should have 8 characters minimum...12 maximum and should
+            have atleast 1 number and 1 alphabet and rest can be either numbers
+            or alphabets.
+          </p>
           <MessageError name="password" errors={errors} />
         </div>
 
@@ -113,6 +118,11 @@ const SRegister = styled.div`
   }
   .input {
     margin-bottom: 10px;
+    .required {
+      margin-top: 7px;
+      font-size: 12px;
+      color: gray;
+    }
   }
   a {
     color: blue;
