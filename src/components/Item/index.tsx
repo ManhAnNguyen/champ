@@ -1,15 +1,20 @@
 import { moneyVND, thousandNumComma } from "helpers/money";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { TProduct } from "types";
 import { GrCart } from "react-icons/gr";
 import { AiOutlineHeart, AiOutlineUndo } from "react-icons/ai";
 import { GoSearch } from "react-icons/go";
 import { RiShoppingCart2Fill } from "react-icons/ri";
-import { useAppDispatch } from "redux/hook";
-import { handleAddToCart } from "pages/Home/store";
+import { useAppDispatch, useAppSelector } from "redux/hook";
+import {
+  handleActionWishList,
+  handleAddToCart,
+  homeSelector,
+} from "pages/Home/store";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { BsHeartFill } from "react-icons/bs";
 
 type Props = {
   product: TProduct;
@@ -17,6 +22,8 @@ type Props = {
 
 const Item = ({ product }: Props) => {
   const dispatch = useAppDispatch();
+  const { wishlists } = useAppSelector(homeSelector);
+  const [isWishList, setIsWishlist] = useState(false);
   const navigate = useNavigate();
   const addToCart = () => {
     if (!localStorage.getItem("currentUser")) {
@@ -26,10 +33,18 @@ const Item = ({ product }: Props) => {
     dispatch(handleAddToCart(product));
     toast.success("Add item to cart successfully");
   };
+
+  useEffect(() => {
+    const isFavorite = wishlists.find((item) => item.id === product.id);
+    setIsWishlist(!!isFavorite);
+  }, [wishlists]);
   return (
     <SItem>
       <div className="product-img">
         <img src={product.img} alt="" />
+        <span className="icon">
+          {isWishList && <BsHeartFill color="red" />}
+        </span>
       </div>
       <div className="product-bottom">
         <div className="product-info">
@@ -42,9 +57,12 @@ const Item = ({ product }: Props) => {
               <RiShoppingCart2Fill />
             </span>
           </div>
-          <div className="action-item">
+          <div
+            className="action-item"
+            onClick={() => dispatch(handleActionWishList(product))}
+          >
             <span className="icon">
-              <AiOutlineHeart />
+              {isWishList ? <BsHeartFill color="red" /> : <AiOutlineHeart />}
             </span>
           </div>
           <div className="action-item">
@@ -76,6 +94,12 @@ const SItem = styled.div`
       position: absolute;
       width: 100%;
       height: 100%;
+    }
+    .icon {
+      position: absolute;
+      z-index: 2;
+      top: 10px;
+      right: 10px;
     }
     &::after {
       content: "";

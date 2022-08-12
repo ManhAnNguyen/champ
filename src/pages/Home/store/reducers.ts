@@ -1,5 +1,6 @@
 import { createReducer } from "@reduxjs/toolkit";
 import {
+  handleActionWishList,
   handleAddToCart,
   handleDecreaseCart,
   handleDeleteAllCart,
@@ -12,6 +13,7 @@ import { THomeStore } from "./types";
 const initialState: THomeStore = {
   productDetail: null,
   carts: [],
+  wishlists: [],
 };
 
 export const homeReducer = createReducer(initialState, (builder) => {
@@ -52,5 +54,18 @@ export const homeReducer = createReducer(initialState, (builder) => {
   });
   builder.addCase(handleDeleteAllCart, (state, action) => {
     state.carts = [];
+  });
+
+  builder.addCase(handleActionWishList, (state, action) => {
+    const existingWishList = state.wishlists.find(
+      (product) => product.id === action.payload.id
+    );
+    if (!!existingWishList) {
+      state.wishlists = state.wishlists.filter(
+        (product) => product.id !== existingWishList.id
+      );
+    } else {
+      state.wishlists = [...state.wishlists, action.payload];
+    }
   });
 });

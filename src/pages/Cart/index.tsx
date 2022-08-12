@@ -6,6 +6,7 @@ import styled from "styled-components";
 import FormInfo from "./FormIno";
 import ItemCart from "./ItemCart";
 import { SCart } from "./styles";
+import { BsArrowBarLeft } from "react-icons/bs";
 
 const Cart = () => {
   const { carts } = useAppSelector(homeSelector);
@@ -29,13 +30,19 @@ const Cart = () => {
     <SCart className="container">
       <h1 className="title">ĐƠN CỦA BẠN</h1>
       <div className="cart-content">
-        <div className="content-left">
-          {carts.map((cart, index) => (
-            <ItemCart key={index} cart={cart} />
-          ))}
-        </div>
-        <div className="content-right">
-          <FormInfo />
+        <Link to="/" className="back">
+          <BsArrowBarLeft className="icon" />
+          <span className="text">back</span>
+        </Link>
+        <div className="cart-content_wrapper">
+          <div className="content-left">
+            {carts.map((cart, index) => (
+              <ItemCart key={index} cart={cart} />
+            ))}
+          </div>
+          <div className="content-right">
+            <FormInfo />
+          </div>
         </div>
       </div>
     </SCart>

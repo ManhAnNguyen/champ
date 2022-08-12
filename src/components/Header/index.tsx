@@ -7,14 +7,17 @@ import { Link, useLocation } from "react-router-dom";
 import { BsPersonCircle } from "react-icons/bs";
 import { useAppSelector } from "redux/hook";
 import { homeSelector } from "pages/Home/store";
+import Wishlist from "components/WishList";
+import useBoolean from "hooks/useBoolean";
 
 const Header = () => {
   const [user, setUser] = useState<any>(null);
-  const { carts } = useAppSelector(homeSelector);
+  const { carts, wishlists } = useAppSelector(homeSelector);
   const location = useLocation();
 
   const handleLogout = () => {
     localStorage.removeItem("currentUser");
+    setUser(null);
   };
 
   useEffect(() => {
@@ -24,7 +27,7 @@ const Header = () => {
     } else {
       setUser(null);
     }
-  }, [location, handleLogout]);
+  }, [location]);
 
   return (
     <SHeader className="container">
@@ -35,14 +38,10 @@ const Header = () => {
           </span>
           <span className="text">Address</span>
         </div>
-        <div className="header-top_item">
-          <span className="icon">
-            <MdFavorite color="#434343" />
-          </span>
-          <span className="text">Wishlist</span>
-        </div>
+
         {!!user ? (
           <>
+            <WishListBtn />
             <div className="header-top_item">
               <span className="icon">
                 <BsPersonCircle color="#434343" />
@@ -113,3 +112,23 @@ const Header = () => {
 };
 
 export default Header;
+
+const WishListBtn = () => {
+  const { valBoolean, setFalse, setTrue } = useBoolean();
+  const { carts, wishlists } = useAppSelector(homeSelector);
+  return (
+    <>
+      <div
+        className="header-top_item"
+        onClick={setTrue}
+        style={{ cursor: "pointer" }}
+      >
+        <span className="icon">
+          <MdFavorite color="#434343" />
+        </span>
+        <span className="text">Wishlist({wishlists.length})</span>
+      </div>
+      <Wishlist setFalse={setFalse} isOpen={valBoolean} />
+    </>
+  );
+};
