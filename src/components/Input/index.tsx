@@ -3,13 +3,14 @@ import styled from "styled-components";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
+  register?: any;
 }
 
-const Input = ({ label, ...rest }: Props) => {
+const Input = ({ label, register, ...rest }: Props) => {
   return (
     <SInput>
       {label && <span className="label">{label}</span>}
-      <input type="text" {...rest} />
+      <input type="text" {...rest} {...register} />
     </SInput>
   );
 };

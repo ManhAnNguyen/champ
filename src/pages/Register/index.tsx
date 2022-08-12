@@ -1,75 +1,66 @@
+import MessageError from "components/Error/ErrorForm";
 import Input from "components/Input";
-import React, { useState } from "react";
+import useFormRegister from "hooks/form/useFormRegister";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 
 const Register = () => {
-  const [user, setUser] = useState({
-    name: "",
-    phone: "",
-    address: "",
-    password: "",
-    confirmation: "",
-  });
-  const navigate = useNavigate();
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    if (user.confirmation !== user.password) {
-      toast.error("Please double check password");
-      return;
-    }
-    const users = localStorage.getItem("users")
-      ? JSON.parse(localStorage.getItem("users")!)
-      : [];
+  const { watch, register, onSubmit, errors } = useFormRegister();
 
-    localStorage.setItem("users", JSON.stringify([...users, user]));
-
-    toast.success("Register successffully");
-    navigate("/signin");
-  };
   return (
     <SRegister>
       <h1 className="title">REGISTER</h1>
-      <form className="form" onSubmit={handleSubmit}>
+      <form className="form" onSubmit={onSubmit}>
         <div className="input">
           <Input
             label="Username"
-            onChange={(e) => setUser({ ...user, name: e.target.value })}
-            value={user.name}
+            register={{
+              ...register("name"),
+            }}
           />
+          <MessageError name="name" errors={errors} />
         </div>
         <div className="input">
           <Input
             label="Phone"
-            onChange={(e) => setUser({ ...user, phone: e.target.value })}
-            value={user.phone}
+            register={{
+              ...register("phone"),
+            }}
             type="number"
           />
+          <MessageError name="phone" errors={errors} />
         </div>
         <div className="input">
           <Input
             label="Address"
-            onChange={(e) => setUser({ ...user, address: e.target.value })}
-            value={user.address}
+            register={{
+              ...register("address"),
+            }}
           />
+          <MessageError name="address" errors={errors} />
         </div>
         <div className="input">
           <Input
             label="Password"
-            onChange={(e) => setUser({ ...user, password: e.target.value })}
-            value={user.password}
+            register={{
+              ...register("password"),
+            }}
             type="password"
           />
+          <MessageError name="password" errors={errors} />
         </div>
 
         <div className="input">
           <Input
             label="Confirmation"
-            onChange={(e) => setUser({ ...user, confirmation: e.target.value })}
-            value={user.confirmation}
+            register={{
+              ...register("confirmation"),
+            }}
             type="password"
           />
+          <MessageError name="confirmation" errors={errors} />
         </div>
 
         <Link to="/signin">Login now</Link>
