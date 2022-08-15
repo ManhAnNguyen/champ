@@ -4,12 +4,17 @@ import styled from "styled-components";
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   register?: any;
+  important?: boolean;
 }
 
-const Input = ({ label, register, ...rest }: Props) => {
+const Input = ({ label, register, important = false, ...rest }: Props) => {
   return (
     <SInput>
-      {label && <span className="label">{label}</span>}
+      {label && (
+        <h3 className="label">
+          {important && <span className="im">*</span>} {label}
+        </h3>
+      )}
       <input type="text" {...rest} {...register} />
     </SInput>
   );
@@ -24,6 +29,13 @@ const SInput = styled.div`
     font-size: 13px;
     color: #434343;
     margin-bottom: 5px;
+    font-weight: 500;
+    .im {
+      color: red;
+      font-size: 20px;
+      position: relative;
+      top: 5px;
+    }
   }
   input {
     border: 1px solid #eee;

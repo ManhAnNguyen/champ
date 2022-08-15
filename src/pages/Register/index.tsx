@@ -16,6 +16,7 @@ const Register = () => {
         <div className="input">
           <Input
             label="Username"
+            important={true}
             register={{
               ...register("name"),
             }}
@@ -25,6 +26,7 @@ const Register = () => {
         <div className="input">
           <Input
             label="Phone"
+            important={true}
             register={{
               ...register("phone"),
             }}
@@ -35,6 +37,7 @@ const Register = () => {
         <div className="input">
           <Input
             label="Address"
+            important={true}
             register={{
               ...register("address"),
             }}
@@ -44,6 +47,7 @@ const Register = () => {
         <div className="input">
           <Input
             label="Password"
+            important={true}
             register={{
               ...register("password"),
             }}
@@ -60,6 +64,7 @@ const Register = () => {
         <div className="input">
           <Input
             label="Confirmation"
+            important={true}
             register={{
               ...register("confirmation"),
             }}

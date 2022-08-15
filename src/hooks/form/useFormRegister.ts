@@ -16,7 +16,6 @@ function useFormRegister() {
         name: yup
           .string()
           .required(requiredMessage("username"))
-          // .matches(REGEX_NAME, invalidMessage("username"))
           .test(
             "username",
             invalidMessage("username"),
@@ -26,7 +25,7 @@ function useFormRegister() {
           .string()
           .matches(REGEX_PHONE, invalidMessage("phone"))
           .required(requiredMessage("phone")),
-        address: yup.string(),
+        address: yup.string().required(requiredMessage("address")),
         password: yup
           .string()
           .matches(REGEX_PASSWORD, invalidMessage("password"))
@@ -64,7 +63,10 @@ function useFormRegister() {
       ? JSON.parse(localStorage.getItem("users")!)
       : [];
 
-    localStorage.setItem("users", JSON.stringify([...users, data]));
+    localStorage.setItem(
+      "users",
+      JSON.stringify([...users, { ...data, id: new Date() }])
+    );
 
     toast.success("Register successffully");
     navigate("/signin");

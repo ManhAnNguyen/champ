@@ -42,12 +42,16 @@ const Header = () => {
         {!!user ? (
           <>
             <WishListBtn />
-            <div className="header-top_item">
+            <Link
+              to="/profile"
+              style={{ textDecoration: "none" }}
+              className="header-top_item"
+            >
               <span className="icon">
                 <BsPersonCircle color="#434343" />
               </span>
               <span className="text">{user.name}</span>
-            </div>
+            </Link>
             <div
               className="header-top_item"
               style={{ marginLeft: "20px", cursor: "pointer" }}
