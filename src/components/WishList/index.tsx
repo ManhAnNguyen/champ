@@ -1,10 +1,11 @@
 import Overlay from "components/Overlay";
-import React from "react";
+import React, { useRef } from "react";
 import Item from "./Item";
 import { SWishList } from "./styles";
 import { RiArrowRightSFill } from "react-icons/ri";
 import { useAppSelector } from "redux/hook";
 import { homeSelector } from "pages/Home/store";
+import useOnClickOutside from "hooks/useClickOutSide";
 
 type Props = {
   setFalse: () => void;
@@ -14,12 +15,15 @@ type Props = {
 const Wishlist = ({ setFalse, isOpen = false }: Props) => {
   const classMotion = isOpen ? "show" : "hidden";
   const { wishlists } = useAppSelector(homeSelector);
+  const ref = useRef(null);
+
+  useOnClickOutside(ref, setFalse);
   return (
     <>
-      <SWishList className={classMotion}>
-        <span className="close" onClick={setFalse}>
+      <SWishList className={classMotion} ref={ref}>
+        {/* <span className="close" onClick={setFalse}>
           <RiArrowRightSFill className="icon" />
-        </span>
+        </span> */}
         <h3 className="title-wishlist">Wishlist({wishlists.length})</h3>
         {wishlists.length === 0 ? (
           <h1 className="no">No wishlist available here</h1>
@@ -32,7 +36,7 @@ const Wishlist = ({ setFalse, isOpen = false }: Props) => {
         )}
       </SWishList>
 
-      {isOpen && <Overlay />}
+      {isOpen && <Overlay css_overlay={{ cursor: "pointer" }} />}
     </>
   );
 };
