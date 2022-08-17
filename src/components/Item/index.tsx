@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from "redux/hook";
 import {
   handleActionWishList,
   handleAddToCart,
+  handleDetailProduct,
   homeSelector,
 } from "pages/Home/store";
 import { toast } from "react-toastify";
@@ -40,7 +41,10 @@ const Item = ({ product }: Props) => {
   }, [wishlists]);
   return (
     <SItem>
-      <div className="product-img">
+      <div
+        className="product-img"
+        onClick={() => dispatch(handleDetailProduct(product))}
+      >
         <img src={product.img} alt="" />
         <span className="icon">
           {isWishList && <BsHeartFill color="red" />}

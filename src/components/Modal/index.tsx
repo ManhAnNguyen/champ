@@ -2,6 +2,7 @@ import React, { CSSProperties, HTMLAttributes, ReactNode } from "react";
 import ReactDOM from "react-dom";
 import styled, { keyframes } from "styled-components";
 import { scrollBar } from "styles/mixin";
+import { FaTimes } from "react-icons/fa";
 
 import Overlay from "../Overlay";
 
@@ -26,7 +27,7 @@ const Modal = React.forwardRef<HTMLDivElement, PropsType>((props, ref) => {
             <p className="title">{title}</p>
           </div>
           <span className="top-close" onClick={toggle}>
-            <img src="/images/close.svg" alt="" />
+            <FaTimes />
           </span>
         </div>
         <div className="modal-content">{children}</div>
@@ -53,7 +54,7 @@ const SModal = styled.div`
   position: fixed;
   background: white;
   width: 90%;
-  max-width: 400px;
+  max-width: 550px;
   height: auto;
   max-height: 90%;
   overflow: auto;
