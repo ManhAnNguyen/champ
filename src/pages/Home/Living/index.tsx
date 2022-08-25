@@ -19,7 +19,6 @@ const Living = () => {
             <Item
               key={index}
               product={{
-                name: `Sofa đơn 1000s-${index + 1}`,
                 img: `/image/living/product${index + 1}.jpg`,
                 ...d,
               }}

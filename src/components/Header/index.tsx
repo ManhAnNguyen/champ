@@ -9,6 +9,7 @@ import { useAppSelector } from "redux/hook";
 import { homeSelector } from "pages/Home/store";
 import Wishlist from "components/WishList";
 import useBoolean from "hooks/useBoolean";
+import Search from "./Search";
 
 const Header = () => {
   const [user, setUser] = useState<any>(null);
@@ -80,12 +81,7 @@ const Header = () => {
         <div className="logo">
           <img src="/image/header/logo.png" alt="" />
         </div>
-        <div className="search-container">
-          <input type="text" placeholder="Tìm kiếm" />
-          <span className="icon">
-            <FiSearch fontSize={23} color="#434343" />
-          </span>
-        </div>
+        <Search />
         <div className="header-bottom_options">
           <div className="option-item">
             <div className="item-left">

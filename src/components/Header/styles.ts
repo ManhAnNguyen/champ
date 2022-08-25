@@ -58,24 +58,7 @@ export const SHeader = styled.div`
       border-top: 1px solid #eee;
       .logo {
       }
-      .search-container {
-        flex: 1;
-        border: 1px solid #33cccc;
-        max-width: 600px;
-        padding: 10px 30px;
-        border-radius: 40px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        input {
-          flex: 1;
-          outline: none;
-          border: none;
-        }
-        .icon {
-          transform: translateY(2px);
-        }
-      }
+
       .header-bottom_options {
         display: flex;
         align-items: center;
